@@ -1,0 +1,28 @@
+﻿@model Usuario
+
+<h1>USUARIO</h1>
+
+<h2>Nombre: @Model.Nombre</h2>
+<img src="@Model.Imagen" width="200px" height="200px" />
+<h2>Email: @Model.Email</h2>
+
+<h1>PEDIDOS</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>FECHA</td>
+            <td>ID_CUBO</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Pedido p in (List<Pedido>)ViewData["PEDIDOS"])
+        {
+            <tr>
+                <td>@p.IdPedido</td>
+                <td>@p.Fecha</td>
+                <td>@p.IdCubo</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,63 @@
+﻿@model List<Cubo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h3>BUSCADOR POR MARCA:</h3>
+<form method="post">
+    <label>Marca:</label>
+    <input class="form-control" type="text" name="marca" />
+    <button class="btn btn-primary">BUSCAR</button>
+</form>
+
+<a asp-action="Create" asp-controller="Cubos">Crear nuevo cubo</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Marca
+            </th>
+            <th>
+                Imagen
+            </th>
+            <th>
+                Precio
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Marca)
+                </td>
+                <td>
+                    <img src="@item.Imagen" width="100px" height="100px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                @if (Context.User.Identity.Name != null)
+                {
+                    <td>
+                        <a class="btn btn-primary" asp-action="Comprar" asp-controller="Cubos" asp-route-id="@item.Id">
+                            Comprar
+                        </a>
+
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
